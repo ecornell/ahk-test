@@ -53,10 +53,19 @@ jobs:
       - name: Run Ahk2Exe
         shell: cmd
         run: |
-          D:\a\ahk-test\ahk-test\_autohotkey\Compiler\Ahk2Exe.exe /silent verbose /in "D:\a\ahk-test\ahk-test\test.ahk" /icon "D:\a\ahk-test\ahk-test\icon.ico" /base "D:\a\ahk-test\ahk-test\_autohotkey\AutoHotkey64.exe"
+          ${{ github.workspace }}\_autohotkey\Compiler\Ahk2Exe.exe /silent verbose /in "${{ github.workspace }}\test.ahk" /icon ${{ github.workspace }}\icon.ico" /base "${{ github.workspace }}\_autohotkey\AutoHotkey64.exe"
 
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
+
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: test.exe
+        env:
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
