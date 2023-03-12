@@ -35,10 +35,10 @@ jobs:
         run: |
           $cwd = (Get-Item .).FullName;
           $command = "$cwd\_autohotkey\Compiler\Ahk2Exe.exe /silent verbose "
-          $command += '/in "D:\a\ahk-test\ahk-test\test.ahk" '
-          $command += '/out "D:\a\ahk-test\ahk-test\test.exe" '
-          $command += '/icon "D:\a\ahk-test\ahk-test\icon.ico" '
-          $command += '/base "D:\a\ahk-test\ahk-test\_autohotkey\AutoHotkey64.exe" '
+          $command += '/in "$cwd\test.ahk" '
+          $command += '/out "$cwd\test.exe" '
+          $command += '/icon "$cwd\icon.ico" '
+          $command += '/base "$cwd\_autohotkey\AutoHotkey64.exe" '
           Invoke-Expression $command
 
       - name: Clean up directories and Create .zip
