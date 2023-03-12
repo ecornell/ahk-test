@@ -69,7 +69,7 @@ jobs:
             $command += '/base "${{vars.base}}" '
           }
           $command += "| Write-Output"
-          Invoke-Expression $command
+          $command
 
       - name: List files in the repository
         run: |
