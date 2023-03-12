@@ -57,10 +57,12 @@ jobs:
           D:\a\ahk-test\ahk-test\_autohotkey\Compiler\Ahk2Exe.exe /silent verbose /in "D:\a\ahk-test\ahk-test\test.ahk" /icon "D:\a\ahk-test\ahk-test\icon.ico" /base "D:\a\ahk-test\ahk-test\_autohotkey\AutoHotkey64.exe"
 
 
-      - name: Create .zip
+      - name: Clean up directories and Create .zip
         shell: pwsh
         run: |
           $cwd = (Get-Item .).FullName;
+          Remove-Item -Path "$cwd\_autohotkey" -Force
+          Remove-Item -Path "$cwd\.github" -Force
           $compress = @{
             Path = "$cwd\*.*"
             CompressionLevel = "Fastest"
