@@ -39,10 +39,14 @@ jobs:
         run: |
           ls ${{ github.workspace }}
 
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}\_autohotkey
+
       - name: Run Ahk2Exe
         shell: pwsh
         run: |
-          $command = '$cwd\_autohotkey\Compiler\Ahk2Exe.exe /silent verbose '
+          $command = 'Ahk2Exe.exe /silent verbose '
           if('${{vars.in}}' -ne ''){
             $command += '/in "${{vars.in}}" '
           }
