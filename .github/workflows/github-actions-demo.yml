@@ -35,10 +35,14 @@ jobs:
           
           Write-Output ("$cwd\_autohotkey\;" + "$cwd\_autohotkey\Compiler") | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+
       - name: Run Ahk2Exe
         shell: pwsh
         run: |
-          $command = 'Ahk2Exe.exe /silent verbose '
+          $command = '_autohotkey\Ahk2Exe.exe /silent verbose '
           if('${{vars.in}}' -ne ''){
             $command += '/in "${{vars.in}}" '
           }
@@ -55,7 +59,5 @@ jobs:
           Invoke-Expression $command
 
 
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
+
       - run: echo "🍏 This job's status is ${{ job.status }}."
