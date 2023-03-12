@@ -55,7 +55,7 @@ jobs:
         run: |
           $cwd = (Get-Item .).FullName;
 
-          $command = "$cwd\_autohotkey\Compiler\Ahk2Exe.exe /silent verbose"
+          $command = "$cwd\_autohotkey\Compiler\Ahk2Exe.exe /silent verbose "
           if('${{vars.in}}' -ne ''){
             $command += '/in "${{vars.in}}" '
           }
