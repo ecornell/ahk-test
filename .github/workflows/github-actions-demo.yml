@@ -53,7 +53,7 @@ jobs:
       - name: Run Ahk2Exe
         shell: cmd
         run: |
-          D:\a\ahk-test\ahk-test\_autohotkey\Compiler\Ahk2Exe.exe /silent verbose /in "D:\a\ahk-test\ahk-test\test.ahk" /icon "D:\a\ahk-test\ahk-test\icon.ico" /base "D:\a\ahk-test\ahk-test\_autohotkey\Compiler\AutoHotkey64.exe"
+          D:\a\ahk-test\ahk-test\_autohotkey\Compiler\Ahk2Exe.exe /silent verbose /in "D:\a\ahk-test\ahk-test\test.ahk" /icon "D:\a\ahk-test\ahk-test\icon.ico" /base "D:\a\ahk-test\ahk-test\_autohotkey\AutoHotkey64.exe"
 
       - name: List files in the repository
         run: |
