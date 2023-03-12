@@ -16,6 +16,9 @@ jobs:
       - run: echo "🖥️ The workflow is now ready to test your code on the runner."
 
 
+      - run: echo "${{vars.base}}"
+
+
       - name: Install AutoHotkey v2
         shell: pwsh
         run: |
@@ -48,7 +51,7 @@ jobs:
         run: |
           $cwd = (Get-Item .).FullName;
 
-          $command = "$cwd\_autohotkey\Compiler\Ahk2Exe.exe /silent verbose "
+          $command = "$cwd\_autohotkey\Compiler\Ahk2Exe.exe /silent verbose"
           if('${{vars.in}}' -ne ''){
             $command += '/in "${{vars.in}}" '
           }
@@ -59,7 +62,7 @@ jobs:
             $command += '/icon "${{vars.icon}}" '
           }
           if('${{vars.base}}' -ne ''){
-            $command += '/base "$Env:BaseFile" '
+            $command += '/base "${{vars.base}}" '
           }
           $command += "| Write-Output"
           Invoke-Expression $command
