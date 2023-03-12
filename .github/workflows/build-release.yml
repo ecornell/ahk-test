@@ -34,7 +34,7 @@ jobs:
 
       - name: Run Ahk2Exe
         shell: pwsh
-        run: |
+        run: |          
           $cwd = (Get-Item .).FullName;
           $command = "$cwd\_autohotkey\Compiler\Ahk2Exe.exe /silent verbose "
           $command += '/in "$cwd\test.ahk" '
@@ -47,13 +47,14 @@ jobs:
       - name: Clean up directories and Create .zip
         shell: pwsh
         run: |
+          $VERSION = $(echo $env:GITHUB_REF | %{$_ -replace './(.)','$1'})
           $cwd = (Get-Item .).FullName;
           Remove-Item "$cwd\_autohotkey" -Recurse
           Remove-Item  "$cwd\.github" -Recurse
           $compress = @{
             Path = "$cwd\*.*"
             CompressionLevel = "Fastest"
-            DestinationPath = "$cwd\test.zip"
+            DestinationPath = "$cwd\test-$VERSION.zip"
           }
           Compress-Archive @compress
 
