@@ -31,10 +31,24 @@ jobs:
           Write-Output ("$cwd\_autohotkey\;" + "$cwd\_autohotkey\Compiler") | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
       - name: Run Ahk2Exe
-        shell: cmd
+        shell: pwsh
         run: |
-          D:\a\ahk-test\ahk-test\_autohotkey\Compiler\Ahk2Exe.exe /silent verbose /in "D:\a\ahk-test\ahk-test\test.ahk" /icon "D:\a\ahk-test\ahk-test\icon.ico" /base "D:\a\ahk-test\ahk-test\_autohotkey\AutoHotkey64.exe"
-
+          $cwd = (Get-Item .).FullName;
+          $command = "$cwd\_autohotkey\Compiler\Ahk2Exe.exe /silent verbose "
+          if('${{vars.in}}' -ne ''){
+            $command += '/in "${{vars.in}}" '
+          }
+          if('${{vars.out}}' -ne ''){
+            $command += '/out "${{vars.out}}" '
+          }
+          if('${{vars.icon}}' -ne ''){
+            $command += '/icon "${{vars.icon}}" '
+          }
+          if('${{vars.base}}' -ne ''){
+            $command += '/base "${{vars.base}}" '
+          }
+          $command += "| Write-Output"
+          Invoke-Expression $command
 
       - name: Clean up directories and Create .zip
         shell: pwsh
