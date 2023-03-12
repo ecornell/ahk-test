@@ -46,7 +46,9 @@ jobs:
       - name: Run Ahk2Exe
         shell: pwsh
         run: |
-          $command = 'Ahk2Exe.exe /silent verbose '
+          $cwd = (Get-Item .).FullName;
+
+          $command = "$cwd\_autohotkey\Compiler\Ahk2Exe.exe /silent verbose "
           if('${{vars.in}}' -ne ''){
             $command += '/in "${{vars.in}}" '
           }
