@@ -55,11 +55,20 @@ jobs:
         run: |
           D:\a\ahk-test\ahk-test\_autohotkey\Compiler\Ahk2Exe.exe /silent verbose /in "D:\a\ahk-test\ahk-test\test.ahk" /icon "D:\a\ahk-test\ahk-test\icon.ico" /base "D:\a\ahk-test\ahk-test\_autohotkey\AutoHotkey64.exe"
 
+
+      - name: Create .zip
+        shell: pwsh
+        run: |
+          $compress = @{
+            Path= "$cwd\*.*"
+            CompressionLevel = "Fastest"
+            DestinationPath = "$cwd\test.zip"
+          }
+          Compress-Archive @compress
+
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
-
-
 
       - name: Release
         uses: softprops/action-gh-release@v1
