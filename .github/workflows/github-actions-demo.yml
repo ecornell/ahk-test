@@ -51,9 +51,9 @@ jobs:
           ls ${{ github.workspace }}\_autohotkey\Compiler
 
       - name: Run Ahk2Exe
-        shell: pwsh
+        shell: cmd
         run: |
-          D:\a\ahk-test\ahk-test\_autohotkey\Compiler\Ahk2Exe.exe /silent verbose /in "test.ahk" /icon "icon.ico" /base "../AutoHotkey64.exe" | Write-Output
+          D:\a\ahk-test\ahk-test\_autohotkey\Compiler\Ahk2Exe.exe /silent verbose /in "test.ahk" /icon "icon.ico" /base "../AutoHotkey64.exe"
 
       - name: List files in the repository
         run: |
