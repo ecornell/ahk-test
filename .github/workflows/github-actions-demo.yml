@@ -42,7 +42,7 @@ jobs:
       - name: Run Ahk2Exe
         shell: pwsh
         run: |
-          $command = '_autohotkey\Ahk2Exe.exe /silent verbose '
+          $command = '$cwd\_autohotkey\Compiler\Ahk2Exe.exe /silent verbose '
           if('${{vars.in}}' -ne ''){
             $command += '/in "${{vars.in}}" '
           }
