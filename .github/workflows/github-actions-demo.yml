@@ -40,7 +40,6 @@ jobs:
         shell: pwsh
         run: |
           $cwd = (Get-Item .).FullName;
-          Remove-Item -Path "$cwd\.github" -Force
           $compress = @{
             Path = "$cwd\*.*"
             CompressionLevel = "Fastest"
