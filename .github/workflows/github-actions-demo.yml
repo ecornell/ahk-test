@@ -53,23 +53,7 @@ jobs:
       - name: Run Ahk2Exe
         shell: pwsh
         run: |
-          $cwd = (Get-Item .).FullName;
-
-          $command = "$cwd\_autohotkey\Compiler\Ahk2Exe.exe /silent verbose "
-          if('${{vars.in}}' -ne ''){
-            $command += '/in "${{vars.in}}" '
-          }
-          if('${{vars.out}}' -ne ''){
-            $command += '/out "${{vars.out}}" '
-          }
-          if('${{vars.icon}}' -ne ''){
-            $command += '/icon "${{vars.icon}}" '
-          }
-          if('${{vars.base}}' -ne ''){
-            $command += '/base "${{vars.base}}" '
-          }
-          $command += "| Write-Output"
-          $command
+          D:\a\ahk-test\ahk-test\_autohotkey\Compiler\Ahk2Exe.exe /silent verbose /in "test.ahk" /icon "icon.ico" /base "../AutoHotkey64.exe" | Write-Output
 
       - name: List files in the repository
         run: |
