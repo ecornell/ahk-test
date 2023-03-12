@@ -69,8 +69,10 @@ jobs:
             $command += '/base "${{vars.base}}" '
           }
           $command += "| Write-Output"
-          $command
+          Invoke-Expression $command
 
-
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
