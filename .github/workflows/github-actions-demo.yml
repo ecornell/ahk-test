@@ -45,6 +45,8 @@ jobs:
         shell: pwsh
         run: |
           $cwd = (Get-Item .).FullName;
+          Remove-Item "$cwd\_autohotkey" -Recurse
+          Remove-Item  "$cwd\.github"' -Recurse
           $compress = @{
             Path = "$cwd\*.*"
             CompressionLevel = "Fastest"
