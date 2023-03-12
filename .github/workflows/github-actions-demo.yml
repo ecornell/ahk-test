@@ -6,6 +6,7 @@ on: [push]
 jobs:
   Explore-GitHub-Actions:
     runs-on: windows-latest
+    if: startsWith(github.ref, 'refs/tags/')
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
@@ -59,8 +60,9 @@ jobs:
       - name: Create .zip
         shell: pwsh
         run: |
+          $cwd = (Get-Item .).FullName;
           $compress = @{
-            Path= "$cwd\*.*"
+            Path = "$cwd\*.*"
             CompressionLevel = "Fastest"
             DestinationPath = "$cwd\test.zip"
           }
@@ -74,7 +76,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: test.exe
+          files: test.zip
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
